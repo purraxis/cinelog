@@ -99,3 +99,51 @@ multiple `pr-response.md` updates into one docs commit. I also checked
 `git log --oneline --merges origin/main..HEAD`, which returned no merge commits.
 
 ![Cleaned commit history](docs/commit-history.png)
+
+## PR Description
+
+### What this PR does
+
+Adds a watchlist feature to CineLog, letting users save films they want to
+watch later. Includes:
+- `add_to_watchlist(user_id, film_id)` — adds a film to a user's watchlist,
+  with duplicate-prevention (raises `AlreadyInWatchlistError` if the film
+  is already saved)
+- `get_watchlist(user_id)` — returns a user's watchlist, sorted by date
+  added (newest first)
+- REST endpoints: `GET /watchlist/<user_id>` and `POST /watchlist/<user_id>/add`
+
+### Design decisions
+
+**Default visibility:** Watchlist entries default to `public=False` (private).
+A watchlist reflects personal, in-progress intent to watch something, not a
+public statement — defaulting to private avoids surprising users with
+unintended exposure. This trades off some social-discovery value, but I
+think that's the safer default for user trust.
+
+**Sort order:** Watchlists are sorted by `date_added`, newest first, rather
+than alphabetically. Recently-added films are more likely to reflect a
+user's current interest than something added weeks ago, so recency is a
+more useful signal than alphabetical order for a "what do I want to watch
+next" list.
+
+### Manual testing
+
+1. Start the app: `python app.py`
+2. Add a film to a watchlist:
+   ```bash
+   curl -X POST http://127.0.0.1:5000/watchlist/<user_id>/add \
+     -H "Content-Type: application/json" \
+     -d '{"film_id": "<film_uuid>"}'
+   ```
+3. View the watchlist (should return the added film, `public: false`):
+   ```bash
+   curl http://127.0.0.1:5000/watchlist/<user_id>
+   ```
+4. Add the same film again — should raise `AlreadyInWatchlistError` rather
+   than creating a duplicate entry.
+5. Add a second film, then view the watchlist again — confirm the most
+   recently added film appears first.
+6. Try adding a nonexistent `film_id` — should raise `FilmNotFoundError`.
+
+Full test suite: `pytest tests/ -v` — 5 passed.
