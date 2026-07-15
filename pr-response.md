@@ -147,3 +147,26 @@ next" list.
 6. Try adding a nonexistent `film_id` — should raise `FilmNotFoundError`.
 
 Full test suite: `pytest tests/ -v` — 5 passed.
+
+## AI Usage
+
+I used Claude to help me get oriented on the project at the start —
+understanding the overall structure of the assignment, how the milestones fit
+together, and what each of the six review comments was actually asking for
+before I started making changes.
+
+For the actual code changes (the rename, deduplication logic, the missing test,
+the visibility default, the sort order, and resolving the rebase conflict), I
+wrote and made those decisions myself. I used Codex to run tests and verify
+commits after each change (e.g. `pytest tests/ -v`, checking
+`git log --oneline` output, confirming no conflict markers remained after the
+rebase) — as a verification step, not to write the code or make the decisions
+for me.
+
+For Comments 4 (default visibility) and 5 (sort order), I formed my own
+position and reasoning first — private by default because a watchlist is
+personal intent rather than a public statement, and date-added sorting because
+recency reflects what a user is more likely to actually want to watch next. I
+used AI to help refine the wording of my written responses in this document,
+and Grammarly to check spelling and grammar, but the reasoning and positions
+themselves are mine.
