@@ -1,3 +1,4 @@
+<img width="815" height="294" alt="Screenshot 2026-07-14 at 20 30 39" src="https://github.com/user-attachments/assets/bd126929-0b73-4d4d-9540-e8ab773c7d5c" />
 # PR Response Doc
 
 ## Comment 1 — Rename
