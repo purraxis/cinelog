@@ -89,3 +89,11 @@ the watchlist model match the post-refactor UUID shape used by `Film.id` and
 **How I verified it:** Ran `grep -n "<<<<<<<\|=======\|>>>>>>>" models.py` and
 confirmed there were no conflict markers left. Then I ran `pytest tests/ -v`
 after the rebase finished, and all 5 tests passed.
+
+## Final history cleanup
+
+I cleaned up the branch history after addressing the review comments. I reworded
+the original watchlist commit so it uses the project's conventional commit
+format, kept the code/test fixes as separate logical commits, and squashed the
+multiple `pr-response.md` updates into one docs commit. I also checked
+`git log --oneline --merges origin/main..HEAD`, which returned no merge commits.
