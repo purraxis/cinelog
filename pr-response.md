@@ -1,4 +1,3 @@
-<img width="815" height="294" alt="Screenshot 2026-07-14 at 20 30 39" src="https://github.com/user-attachments/assets/bd126929-0b73-4d4d-9540-e8ab773c7d5c" />
 # PR Response Doc
 
 ## Comment 1 — Rename
@@ -98,3 +97,5 @@ the original watchlist commit so it uses the project's conventional commit
 format, kept the code/test fixes as separate logical commits, and squashed the
 multiple `pr-response.md` updates into one docs commit. I also checked
 `git log --oneline --merges origin/main..HEAD`, which returned no merge commits.
+
+![Cleaned commit history](docs/commit-history.png)
